@@ -1,4 +1,4 @@
-const MODULE_VERSION = "0.4.6";
+const MODULE_VERSION = "0.4.7";
 const _state = await import(new URL("../state.js?v=" + MODULE_VERSION, import.meta.url).href);
 const _stage = await import(new URL("../stage-engine.js?v=" + MODULE_VERSION, import.meta.url).href);
 const { initStore, getStageBucket, setStageBucket } = _state;

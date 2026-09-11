@@ -7,7 +7,7 @@
 import { existsSync } from "node:fs";
 import { join, resolve } from "node:path";
 
-const MODULE_VERSION = "0.4.6";
+const MODULE_VERSION = "0.4.7";
 const _routing = await import(new URL("./routing-store.js?v=" + MODULE_VERSION, import.meta.url).href);
 const _reg = await import(new URL("./registration-store.js?v=" + MODULE_VERSION, import.meta.url).href);
 const { loadRouting, saveRouting } = _routing;

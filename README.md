@@ -2,7 +2,7 @@
 
 把 [dsh-routing-suite](https://github.com/yjh051108/dsh-routing-suite) 的 `router-standard`（v1.20.0）**1:1 移植**到 HanaAgent 的极简模式插件：T0 锚定、四阶段渐进工具披露、按任务释放平台工具包、按模型路由、跨版本三档通道适配；全程保留 Hana 原生功能（非破坏原则）。
 
-- **版本**：0.4.6（`manifest.json` / `package.json`）
+- **版本**：0.4.7（`manifest.json` / `package.json`）
 - **最低 Hana 版本**：0.447.4（`manifest.json` `minAppVersion`）
 - **权限**：`full-access`（使用 `extensions/`）
 - **依赖**：零 npm 依赖，Node ESM；单测 `node --test`
@@ -46,7 +46,7 @@
 
 2. Hana → 设置 → 插件 → 权限：开启「**允许 Agent 插件开发工具**」。
 3. 在 Hana 中执行 `plugin_dev_reload`（或重启 Hana）加载/重载。
-4. 设置 → 插件：确认「Hana Minimal Mode **0.4.6**」出现，并打开「**全权（full-access）**」开关。
+4. 设置 → 插件：确认「Hana Minimal Mode **0.4.7**」出现，并打开「**全权（full-access）**」开关。
 
 ### 2.2 手动复制到 plugins
 
@@ -194,7 +194,7 @@
 ## 8. 故障排查
 
 1. **查状态**：优先执行 `/minimal status`（开关/目标助手/模式/通道/阶段/平台包）或让模型调用 `router_status`（额外含模型家族与最近晋级）。
-2. **状态与日志位置**：会话阶段状态在 `${HANA_HOME}/plugin-data/hana-minimal-mode/stage-state.json`（JSON：`buckets` 会话别名桶 + `stages` 每会话阶段）。运行日志见 Hana 的插件日志：加载信息 `hana-minimal-mode v0.4.6 loaded...`、配置同步失败 `config sync failed`、扩展异常 `hana-minimal-mode: ...`。
+2. **状态与日志位置**：会话阶段状态在 `${HANA_HOME}/plugin-data/hana-minimal-mode/stage-state.json`（JSON：`buckets` 会话别名桶 + `stages` 每会话阶段）。运行日志见 Hana 的插件日志：加载信息 `hana-minimal-mode v0.4.7 loaded...`、配置同步失败 `config sync failed`、扩展异常 `hana-minimal-mode: ...`。
 3. **确认当前通道**：查看本轮 provider 工具列表——有 `hana-minimal-mode_` 前缀工具 = native；没有插件工具但有 `mcp_call` = bridge；两者都没有 = legacy。也可直接看 `/minimal status` 的「通道」行。注意：升级 Hana 后档位变化属预期，无需改配置。
 4. **设置不生效**：检查 `enabled` 是否为真、右侧栏「极简模式」面板中是否已注册目标助手（未注册 = 不作用任何助手）、是否开启了 full-access。运行列表可直接查看 `${HANA_HOME}/plugin-data/hana-minimal-mode/routing.json`。设置改动在**下一轮请求**生效（`plugin_config_changed` 事件 + 60s 轮询兜底）；如果事件丢失，最迟 60s 后对齐。
 5. **旧会话没反应（busy 会话扩展重绑延迟）**：热重载/重装插件时，正在忙碌的会话可能跳过扩展重绑（宿主设计），该会话不会立即挂上新扩展；新开一个会话或重启 Hana 即可。这是宿主行为，不是插件故障。
@@ -203,6 +203,11 @@
 8. **升级注意（旧配置迁移）**：旧版的 `targetAgents`（含更早的 `minimalAgentId`）会在 `routing.json` 不存在时自动迁移进 `routing.json`，**不回写原生配置**；历史多注册会自动收敛为单选（保留最新注册者）；旧 `allowlist` 键被忽略/移除；`trimContext` 键随裁剪器一并移除，新增 `postAnchorInjection`（默认开）。升级后建议在右侧栏「极简模式」面板确认一次当前目标。
 
 ## 9. Changelog
+
+### 0.4.7
+
+- **面板图标严格对齐 Hana 原生图标系统（设计规范级）**：按 Hana 桌面端侧栏图标 1:1 规范绘制——`width/height=14`、`viewBox 0 0 24 24`、`fill=none`、`stroke=currentColor`、**`stroke-width=1.5`**、`stroke-linecap/linejoin=round`（0.4.6 的 2px 线宽与省略尺寸会偏粗、失去与原生图标的视觉一致性）；图形采用 Lucide `zap`（24 网格圆角闪电，与 Hana 原生 `settings` 等同网格、同线重、同视觉密度），深浅主题由 `currentColor` 自适应。
+- **版本**：同步 `MODULE_VERSION`（12 处）与 `manifest.json` / `package.json`；测试保持 152。
 
 ### 0.4.6
 
@@ -324,7 +329,7 @@
 
 ```text
 hana-minimal-mode/
-├── manifest.json        # id/version 0.4.6、minAppVersion 0.447.4、full-access、中文 configuration（9 项行为开关）+ widget（/widget；无 page）
+├── manifest.json        # id/version 0.4.7、minAppVersion 0.447.4、full-access、中文 configuration（9 项行为开关）+ widget（/widget；无 page）
 ├── package.json         # ESM；node --test 单测（152 用例）
 ├── index.js             # 生命周期：config 镜像、routing.json 迁移、单选收敛（collapseToSingle/setTarget）、已删除目标剪枝（不回写设置）、R39 阶段清扫（pruneStagesExcept）+ settings-mirror 删除、R40 已删除会话清理（pruneMissingSessions）、plugin_config_changed + 60s 轮询
 ├── state.js             # 共享单例：默认配置、会话别名桶、阶段持久化（stage-state.json）、按助手清理/目标清扫/已删除会话清理阶段状态（clearAgentStages/pruneStagesExcept/pruneMissingSessions）

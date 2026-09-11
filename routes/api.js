@@ -7,7 +7,7 @@
 // a 500 JSON payload and never throw into the host pipeline.
 import path from "node:path";
 
-const MODULE_VERSION = "0.4.6";
+const MODULE_VERSION = "0.4.7";
 const _state = await import(new URL("../state.js?v=" + MODULE_VERSION, import.meta.url).href);
 const _router = await import(new URL("../router-core.js?v=" + MODULE_VERSION, import.meta.url).href);
 const _catalog = await import(new URL("../agent-catalog.js?v=" + MODULE_VERSION, import.meta.url).href);

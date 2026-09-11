@@ -1,4 +1,4 @@
-const MODULE_VERSION = "0.4.6";
+const MODULE_VERSION = "0.4.7";
 const _state = await import(new URL("../state.js?v=" + MODULE_VERSION, import.meta.url).href);
 const _router = await import(new URL("../router-core.js?v=" + MODULE_VERSION, import.meta.url).href);
 const _compat = await import(new URL("../compat.js?v=" + MODULE_VERSION, import.meta.url).href);
