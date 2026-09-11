@@ -55,12 +55,6 @@
 2. 新开一个会话开始工作：首轮为锚定确认轮（模型复述目标、说明工具族与做法），下一轮起按阶段推进。
 3. 完成信号（阶段完成、交付确认）会自动晋级；也可直接对话「开启/关闭极简模式」切换目标。
 
-## 兼容性
-
-- **最低 Hana 版本**：0.447.4（`manifest.json` `minAppVersion`）
-- **Hana ≥ 0.447.4**：`native` 档（插件工具直调）或 `bridge` 档（经 `mcp_call`，工具带 `hana-minimal-mode_` 前缀）；`legacy` 档自动安全降级（工具全量、调用即释放）
-- **平台**：Windows / macOS / Linux；零 npm 依赖，Node ESM
-
 ## 目录结构
 
 ```
@@ -86,6 +80,12 @@ hana-minimal-mode/
                            #   request_tools / router_status / tools_catalog / tools_help /
                            #   persona_reconcile）
 ```
+
+## 兼容性
+
+- **最低 Hana 版本**：0.447.4（`manifest.json` `minAppVersion`）
+- **Hana ≥ 0.447.4**：`native` 档（插件工具直调）或 `bridge` 档（经 `mcp_call`，工具带 `hana-minimal-mode_` 前缀）；`legacy` 档自动安全降级（工具全量、调用即释放）
+- **平台**：Windows / macOS / Linux；零 npm 依赖，Node ESM
 
 ## 更新记录
 
