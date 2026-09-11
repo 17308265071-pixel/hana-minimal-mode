@@ -1,0 +1,8 @@
+{
+  "name": "hana-minimal-mode",
+  "version": "0.4.6",
+  "private": true,
+  "type": "module",
+  "description": "DSH-style minimal mode with router-standard progressive disclosure for HanaAgent",
+  "license": "MIT"
+}

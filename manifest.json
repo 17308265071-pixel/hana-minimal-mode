@@ -1,0 +1,32 @@
+{
+  "manifestVersion": 1,
+  "id": "hana-minimal-mode",
+  "name": "Hana Minimal Mode",
+  "version": "0.4.6",
+  "description": "极简模式 × dsh-routing-suite：任务感知路由、T0 锚定、四阶段渐进工具披露、按模型路由。在右侧栏「极简模式」面板中注册/取消注册目标助手（单选：注册即替换，删除即清空）；切换或清除会同步清理注册与旧助手会话阶段状态。",
+  "minAppVersion": "0.447.4",
+  "trust": "full-access",
+  "activationEvents": ["onStartup"],
+  "capabilities": ["session", "agent"],
+  "ui": { "hostCapabilities": [] },
+  "contributes": {
+    "configuration": {
+      "properties": {
+        "enabled": { "type": "boolean", "default": true, "title": "启用极简模式路由（总开关）" },
+        "routerMode": { "type": "string", "default": "auto", "enum": ["auto", "spec", "react", "weak", "mixed"], "title": "路由模式覆盖", "description": "auto=标准渐进流程；其余值当前仅记录并展示（旧版带 persona 行为未接线）" },
+        "stagedUnlock": { "type": "boolean", "default": true, "title": "四阶段渐进流程", "description": "了解/对齐 → 拟合方案 → 开发 → 验证，完成信号自动晋级；阶段为流程指引，不再裁剪工具面（锚定后全量释放）。" },
+        "zeroToolAnchor": { "type": "boolean", "default": true, "title": "首轮锚定（确认轮）", "description": "首轮注入 RL persona、锚定提示与能力地图（从当轮实际工具列表生成，模型据此说明本任务所需工具族）；锚定后工具全量释放（native 首轮仅 phase_begin，bridge/legacy 仅桥工具；两种档位都保留 Hana 记忆工具 search_memory/recall_experience/current_status）。" },
+        "bootstrapMaxTokens": { "type": "integer", "default": 1024, "title": "锚定轮输出预算", "description": "首轮回复 token 上限（0=不限）。" },
+        "dynamicPacks": { "type": "boolean", "default": true, "title": "按任务自动释放平台工具包", "description": "二轮起按任务关键词自动打开文档/表格/PPT/浏览器/桌面/媒体等工具包。" },
+        "postAnchorInjection": { "type": "boolean", "default": true, "title": "锚定后注入路由引导", "description": "首轮锚定完成后，向模型注入 persona/阶段/工具引导。关闭则锚定后不再注入（保留首轮锚定行为）。" },
+        "networkGuard": { "type": "boolean", "default": false, "title": "网络命令守卫", "description": "拦截 exec_command 中的 curl/wget/ssh 等网络命令。默认关闭；注意阶段 0 含联网检索。" },
+        "conversationControl": { "type": "boolean", "default": true, "title": "对话开关", "description": "对话中说「开启/关闭极简模式」可把当前助手设为唯一目标或取消目标。" }
+      }
+    },
+    "widget": {
+      "title": { "zh": "极简模式", "en": "Minimal Mode" },
+      "icon": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z'/></svg>",
+      "route": "/widget"
+    }
+  }
+}
