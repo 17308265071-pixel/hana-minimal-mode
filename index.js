@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 
-const MODULE_VERSION = "0.4.7";
+const MODULE_VERSION = "0.5.0";
 const _state = await import(new URL("./state.js?v=" + MODULE_VERSION, import.meta.url).href);
 const _catalog = await import(new URL("./agent-catalog.js?v=" + MODULE_VERSION, import.meta.url).href);
 const _routing = await import(new URL("./routing-store.js?v=" + MODULE_VERSION, import.meta.url).href);
@@ -158,7 +158,7 @@ export default class HanaMinimalModePlugin {
     const timer = setInterval(() => void this._sync(), 60_000);
     if (typeof timer?.unref === "function") timer.unref();
     register(() => clearInterval(timer));
-    ctx.log?.info?.("hana-minimal-mode v0.4.7 loaded (router-standard progressive disclosure, sidebar-panel single-target)");
+    ctx.log?.info?.("hana-minimal-mode v0.5.0 loaded (router-standard progressive disclosure, sidebar-panel single-target)");
   }
 
   async onunload() {

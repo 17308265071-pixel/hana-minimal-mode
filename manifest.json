@@ -2,7 +2,7 @@
   "manifestVersion": 1,
   "id": "hana-minimal-mode",
   "name": "Hana Minimal Mode",
-  "version": "0.4.7",
+  "version": "0.5.0",
   "description": "极简模式 × dsh-routing-suite：任务感知路由、T0 锚定、四阶段渐进工具披露、按模型路由。在右侧栏「极简模式」面板中注册/取消注册目标助手（单选：注册即替换，删除即清空）；切换或清除会同步清理注册与旧助手会话阶段状态。",
   "minAppVersion": "0.447.4",
   "trust": "full-access",
